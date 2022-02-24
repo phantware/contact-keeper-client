@@ -1,70 +1,53 @@
-import React, { userReducer } from 'react'
-import uuid from 'uuid'
-import contactContext from './contactContext'
+import React, { useReducer, useContext } from 'react'
+import axios from 'axios'
+import ContactContext from './contactContext'
 import contactReducer from './contactReducer'
-
 import {
+  GET_CONTACTS,
   ADD_CONTACT,
   DELETE_CONTACT,
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_CONTACT,
   FILTER_CONTACTS,
+  CLEAR_CONTACTS,
   CLEAR_FILTER,
-  SET_ALERT,
-  REMOVE_ALERT,
+  CONTACT_ERROR,
 } from '../types'
 
-const ContactState = (props) => {
+const ContactState = ({ children }) => {
   const initialState = {
     contacts: [
       {
         id: 1,
-        name: 'Jill Jhonson',
-        email: 'jill@gmail.com',
+        name: 'Ismail Jamiu',
+        email: 'phantmoney2011@gmail.com',
         phone: '111-111-111',
         type: 'personal',
       },
       {
         id: 2,
-        name: 'Sara Watson',
-        email: 'sara@gmail.com',
+        name: 'Kenny Olawale',
+        email: 'kennyb@gmail.com',
         phone: '222-222-222',
         type: 'personal',
       },
       {
         id: 3,
-        name: 'Harry White',
-        email: 'harry@gmail.com',
+        name: 'Jackson Omogege',
+        email: 'omoge@gmail.com',
         phone: '333-333-333',
-        type: 'professional',
+        type: 'personal',
       },
     ],
   }
-  const [state, dispatch] = userReducer(contactReducer, initialState)
 
-  // Add Contact
-
-  //Delete Contact
-
-  //Set Current Contact
-
-  // Clear Contact
-
-  // Update Contact
-
-  // Filter Contacts
-
-  // Cler Filter
+  const [state, dispatch] = useReducer(contactReducer, initialState)
 
   return (
-    <contactContext.Provider
-      value={{
-        contacts: state.contacts,
-      }}
-    >
-      {props.children}
-    </contactContext.Provider>
+    <ContactContext.Provider value={{ contacts: state.contacts }}>
+      {children}
+    </ContactContext.Provider>
   )
 }
 
