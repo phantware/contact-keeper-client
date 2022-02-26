@@ -1,29 +1,51 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import ContactContext from '../../context/contact/contactContext'
 
 const ContactForm = () => {
+  const contactContext = useContext(ContactContext)
+
   const [contact, setContact] = useState({
     name: '',
     email: '',
     phone: '',
-    type: '',
+    type: 'personal',
   })
 
   const { name, email, phone, type } = contact
 
   const onChange = (e) =>
     setContact({ ...contact, [e.target.name]: e.target.value })
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    contactContext.addContact(contact)
+    setContact({
+      name: '',
+      email: '',
+      phone: '',
+      type: 'personal',
+    })
+  }
   return (
-    <form>
-      <input type='text' placeholder='name' vlaue={name} onChange={onChange} />
+    <form onSubmit={onSubmit}>
+      <input
+        type='text'
+        placeholder='name'
+        name='name'
+        vlaue={name}
+        onChange={onChange}
+      />
       <input
         type='text'
         placeholder='email'
+        name='email'
         vlaue={email}
         onChange={onChange}
       />
       <input
         type='text'
         placeholder='phone'
+        name='phone'
         vlaue={phone}
         onChange={onChange}
       />

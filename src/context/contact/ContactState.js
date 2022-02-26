@@ -1,4 +1,5 @@
 import React, { useReducer, useContext } from 'react'
+import * as uuid from 'uuid'
 import axios from 'axios'
 import ContactContext from './contactContext'
 import contactReducer from './contactReducer'
@@ -44,8 +45,15 @@ const ContactState = ({ children }) => {
 
   const [state, dispatch] = useReducer(contactReducer, initialState)
 
+  //Add Contact
+
+  const addContact = (contact) => {
+    contact.id = uuid.v4()
+    dispatch({ type: ADD_CONTACT, payload: contact })
+  }
+
   return (
-    <ContactContext.Provider value={{ contacts: state.contacts }}>
+    <ContactContext.Provider value={{ contacts: state.contacts, addContact }}>
       {children}
     </ContactContext.Provider>
   )
