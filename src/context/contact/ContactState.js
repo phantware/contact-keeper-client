@@ -23,7 +23,7 @@ const ContactState = ({ children }) => {
         name: 'Ismail Jamiu',
         email: 'phantmoney2011@gmail.com',
         phone: '111-111-111',
-        type: 'personal',
+        type: 'professional',
       },
       {
         id: 2,
