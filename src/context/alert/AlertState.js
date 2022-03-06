@@ -21,3 +21,5 @@ const AlertState = ({ children }) => {
     </AlertContext.Provider>
   )
 }
+
+export default AlertState
